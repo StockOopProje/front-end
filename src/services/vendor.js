@@ -2,6 +2,11 @@ import axios from "axios"
 
 const url = process.env.REACT_APP_API_URL+"vendor/" 
 
+const getAll = async ()=>{
+      const res = await axios.get(url+"getAll")
+
+      return res.data
+}
 
 const addCustomer = async (vendor)=>{
       return axios.post(url+"addCustomer",vendor)
@@ -12,7 +17,7 @@ const listSales = async (vendor)=>{
 }
 
 const displayCustomer = async (vendor)=>{
-      return axios.post(url+"displayCustomer",vendor
+      return axios.post(url+"displayCustomer",vendor)
 }
 
 const deleteCustomer = async (vendor)=>{
@@ -24,6 +29,6 @@ const updateCustomer = async (vendor)=>{
 }
 
 
-const service = {addCustomer,listSales,displayCustomer,deleteCustomer,updateCustomer}
+const service = {getAll,addCustomer,listSales,displayCustomer,deleteCustomer,updateCustomer}
 
 export default service
