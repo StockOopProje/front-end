@@ -8,27 +8,27 @@ const getAll = async ()=>{
       return res.data
 }
 
-const addCustomer = async (vendor)=>{
-      return axios.post(url+"addCustomer",vendor)
+const addVendor = async (vendor)=>{
+      return axios.post(url+"addVendor",vendor)
 }
 
-const listSales = async (vendor)=>{
-      return axios.post(url+"listSales",vendor)
+const listPurchases = async (vendor)=>{
+      return axios.post(url+"listPurchases",vendor)
 }
 
-const displayCustomer = async (vendor)=>{
-      return axios.post(url+"displayCustomer",vendor)
+const displayVendor = async (vendor)=>{
+      return axios.post(url+"displayVendor",vendor)
 }
 
-const deleteCustomer = async (vendor)=>{
-      return axios.post(url+"deleteCustomer",vendor)
+const deleteVendor = async (vendor)=>{
+      return axios.post(url+"deleteVendor",vendor)
 }
 
-const updateCustomer = async (vendor)=>{
-      return axios.post(url+"updateCustomer",vendor)
+const updateVendor = async (vendor)=>{
+      return axios.post(url+"updateVendor",vendor)
 }
 
 
-const service = {getAll,addCustomer,listSales,displayCustomer,deleteCustomer,updateCustomer}
+const service = {getAll,addVendor,listPurchases,displayVendor,deleteVendor,updateVendor}
 
 export default service
