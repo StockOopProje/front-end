@@ -10,8 +10,8 @@ const displayZReportMonthly = async (date)=>{
     return axios.post(url+"displayZReportMonthly",date)
 }
 
-const displayZReportByDates = async (start,finish)=>{
-    return axios.post(url+"displayZReportByDates",{start,finish})
+const displayZReportByDates = async (values)=>{
+    return axios.post(url+"displayZReportByDates",values)
 }
 
 const service = {displayZReportDaily,displayZReportMonthly,displayZReportByDates}
