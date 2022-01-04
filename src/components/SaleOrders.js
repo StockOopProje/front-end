@@ -40,7 +40,6 @@ const SaleOrders = ()=>{
     React.useEffect(()=>{
         SaleService.getAll().then(res=>{
             setSales(res.data)
-            console.log(res.data)
         })
     },[popup])
 
@@ -84,7 +83,7 @@ const SaleOrders = ()=>{
                     </Grid>
                 </Grid>
                 {sales.map(item=>(
-                    <Card className={classes.card}>
+                    <Card className={classes.card} key={item.id}>
                         <Grid container spacing={2} sx={{p:1}}>
                             <Grid item xs={2}>
                                 {item.product.name}

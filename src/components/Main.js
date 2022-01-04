@@ -37,7 +37,7 @@ const Main = ()=>{
                 <h1 className={classes.logo}>Stock Managment System</h1>
             </Card>
             {pages.map(item=>(
-                <Card className={classes.card} onClick={()=>navigate(item.path)}>
+                <Card key={item.name} className={classes.card} onClick={()=>navigate(item.path)}>
                     <Grid container spacing={2}>
                         <Grid item xs={2}>
                             <div className={classes.icon}>

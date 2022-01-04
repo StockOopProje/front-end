@@ -40,7 +40,6 @@ const PurchaseOrders = ()=>{
     React.useEffect(()=>{
         PurchaseService.getAll().then(res=>{
             setPurhcases(res.data)
-            console.log(res.data)
         })
     },[popup])
 
@@ -84,7 +83,7 @@ const PurchaseOrders = ()=>{
                     </Grid>
                 </Grid>
                 {purchases.map(item=>(
-                    <Card className={classes.card}>
+                    <Card className={classes.card} key={item.id}>
                         <Grid container spacing={2} sx={{p:1}}>
                             <Grid item xs={2}>
                                 {item.product.name}
