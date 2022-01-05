@@ -98,7 +98,7 @@ const VendorEntry = ({vendor,setVendor,setPopup})=>{
                 autoHideDuration={5000}
                 onClose={()=>setProgress(0)}
             >
-                <Alert onClose={()=>setProgress(0)} severity="success">Vendor entry taked!</Alert>
+                <Alert onClose={()=>setProgress(0)} severity="success">Vendor entry taken!</Alert>
         </Snackbar>
         <Container>
             <h1>{vendor ? "Vendor Update":"Vendor Entry"}</h1>

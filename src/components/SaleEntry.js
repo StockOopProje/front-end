@@ -83,7 +83,10 @@ const SaleEntry = ()=>{
         SaleService.saleProduct(values)
         .then(res=>{
             if(res.data.success){
-                setProgress(2)
+                if (res.data.message)
+                    setProgress(4);
+                else
+                    setProgress(2)
             }
             else{
                 setProgress(3)
@@ -101,7 +104,7 @@ const SaleEntry = ()=>{
                 autoHideDuration={1000}
                 onClose={()=>setProgress(0)}
             >
-                <Alert onClose={()=>setProgress(0)} severity="success">Sale entry taked!</Alert>
+                <Alert onClose={()=>setProgress(0)} severity="success">Sale entry taken!</Alert>
         </Snackbar>
         <Snackbar
                 open={progress===3}
@@ -109,6 +112,13 @@ const SaleEntry = ()=>{
                 onClose={()=>setProgress(0)}
             >
                 <Alert onClose={()=>setProgress(0)} severity="error">Not enough stock!</Alert>
+        </Snackbar>
+        <Snackbar
+            open={progress===4}
+            autoHideDuration={1000}
+            onClose={()=>setProgress(0)}
+        >
+            <Alert onClose={()=>setProgress(0)} severity="warning">Minimum stock limit has reached.</Alert>
         </Snackbar>
         <Container>
             <h1>Sale Entry</h1>

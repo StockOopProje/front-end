@@ -100,7 +100,7 @@ const CustomerEntry = ({customer,setCustomer,setPopup})=>{
                 autoHideDuration={5000}
                 onClose={()=>setProgress(0)}
             >
-                <Alert onClose={()=>setProgress(0)} severity="success">Customer entry taked!</Alert>
+                <Alert onClose={()=>setProgress(0)} severity="success">Customer entry taken!</Alert>
         </Snackbar>
         <Container>
             <h1>{customer ? "Customer Update":"Customer Entry"}</h1>
