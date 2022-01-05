@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Container,FormControl,InputLabel,OutlinedInput, Button,InputAdornment,Snackbar,Alert,CircularProgress } from "@mui/material"
 import {makeStyles} from "@mui/styles"
 
@@ -26,14 +26,16 @@ const useStyles = makeStyles({
 })
 
 
-const CustomerEntry = ()=>{
+const CustomerEntry = ({customer,setCustomer,setPopup})=>{
 
     const classes = useStyles()
     const [progress,setProgress] = useState(0)
     const [values,setValues] = useState({name:"",company_name:"",address:"",cell_phone:"",email:""})
 
     const handleChange=(e)=>{
+
         const {name,value} = e.target
+
         setValues(prevValue=>{
             if(name === "name"){
                 return ({...prevValue,name:value})
@@ -54,8 +56,28 @@ const CustomerEntry = ()=>{
         })
     }
 
+    useEffect(()=>{
+        if(customer){
+            const temp = JSON.parse(JSON.stringify(customer))
+            setValues(temp)
+        }
+    },[])
+
     const submit = ()=>{
         setProgress(1)
+        if(customer){
+            CustomerService.updateCustomer(values).then(res=>{
+                if(res.data.success){
+                    setProgress(2)
+                }
+                else{
+                    setProgress(0)
+                }
+                setCustomer(null)
+                setPopup(false)
+            })
+            return
+        }
         CustomerService.addCustomer(values)
         .then(res=>{
             if(res.data.success){
@@ -81,7 +103,7 @@ const CustomerEntry = ()=>{
                 <Alert onClose={()=>setProgress(0)} severity="success">Customer entry taked!</Alert>
         </Snackbar>
         <Container>
-            <h1>Customer Entry</h1>
+            <h1>{customer ? "Customer Update":"Customer Entry"}</h1>
             <FormControl fullWidth sx={{ m: 2 }}>
                 <InputLabel htmlFor="outlined-adornment-amount">Name</InputLabel>
                 <OutlinedInput

@@ -4,7 +4,6 @@ import {Add,ArrowBackIos} from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import {makeStyles} from "@mui/styles"
 import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 // services
 import VendorService from "../services/vendor"
@@ -25,6 +24,7 @@ const VendorDetail = ()=>{
     const classes = useStyles()
 
     const [popup,setPopup] = React.useState(false)
+    const [vendor,setVendor] = React.useState(null)
     const [vendors,setVendors] = React.useState([])
 
     React.useEffect(()=>{
@@ -33,6 +33,11 @@ const VendorDetail = ()=>{
         })
     },[popup])
 
+    const update = (ven)=>{
+        setVendor(ven)
+        setPopup(true)
+    }
+
 
     return(
         <>
@@ -40,8 +45,8 @@ const VendorDetail = ()=>{
                 <ArrowBackIos/>
                 Back
             </Button>
-            <Popup open={popup} setOpen={setPopup} title="Vendor Entry">
-                <VendorEntry/>
+            <Popup open={popup} setOpen={setPopup} setClose={()=>setVendor(null)} title={vendor ? "Vendor Update":"Vendor Entry"}>
+                <VendorEntry setPopup={setPopup} vendor={vendor} setVendor={setVendor}/>
             </Popup>
             <SpeedDial
                 ariaLabel="SpeedDial basic example"
@@ -91,8 +96,7 @@ const VendorDetail = ()=>{
                                 {item.email}
                             </Grid>
                             <Grid item xs={2}>
-                                <Button><EditIcon/></Button>
-                                <Button color="error"><DeleteIcon/></Button>
+                                <Button onClick={()=>update(item)}><EditIcon/></Button>
                             </Grid>
                         </Grid>
                     </Card>

@@ -81,8 +81,13 @@ const SaleEntry = ()=>{
     const submit = ()=>{
         setProgress(1)
         SaleService.saleProduct(values)
-        .then(item=>{
-            setProgress(2)
+        .then(res=>{
+            if(res.data.success){
+                setProgress(2)
+            }
+            else{
+                setProgress(3)
+            }
         })
         .catch(err=>{
             setProgress(0)
@@ -93,10 +98,17 @@ const SaleEntry = ()=>{
     <>
         <Snackbar
                 open={progress===2}
-                autoHideDuration={5000}
+                autoHideDuration={1000}
                 onClose={()=>setProgress(0)}
             >
                 <Alert onClose={()=>setProgress(0)} severity="success">Sale entry taked!</Alert>
+        </Snackbar>
+        <Snackbar
+                open={progress===3}
+                autoHideDuration={1000}
+                onClose={()=>setProgress(0)}
+            >
+                <Alert onClose={()=>setProgress(0)} severity="error">Not enough stock!</Alert>
         </Snackbar>
         <Container>
             <h1>Sale Entry</h1>

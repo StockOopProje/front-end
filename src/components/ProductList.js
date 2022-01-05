@@ -4,7 +4,6 @@ import {Add,ArrowBackIos} from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import {makeStyles} from "@mui/styles"
 import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import Barcode from 'react-barcode';
 
 // services
@@ -33,7 +32,7 @@ const ProductList = ()=>{
             setProducts(res.data)
         })
     },[popup])
-
+ 
 
     return(
         <>
@@ -93,7 +92,6 @@ const ProductList = ()=>{
                             </Grid>
                             <Grid item xs={2}>
                                 <Button><EditIcon/></Button>
-                                <Button color="error"><DeleteIcon/></Button>
                             </Grid>
                         </Grid>
                     </Card>

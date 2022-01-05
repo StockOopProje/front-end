@@ -15,6 +15,7 @@ export default function FullScreenDialog(props) {
 
   const handleClose = () => {
     props.setOpen(false);
+    props.setClose()
   };
 
   return (

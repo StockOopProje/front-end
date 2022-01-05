@@ -9,12 +9,16 @@ const getAll = async ()=>{
       return res.data
 }
 
-
 const saleProduct = async (sale)=>{
       return axios.post(url+"saleProduct",sale)
 }
 
+const deleteSale = async (sale)=>{
+      return axios.post(url+"deleteSale",sale)
+}
 
-const service = {getAll,saleProduct}
+
+
+const service = {getAll,saleProduct,deleteSale}
 
 export default service

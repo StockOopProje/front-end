@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 })
 
 
-const VendorEntry = ()=>{
+const VendorEntry = ({vendor,setVendor,setPopup})=>{
 
     const classes = useStyles()
     const [progress,setProgress] = useState(0)
@@ -54,8 +54,28 @@ const VendorEntry = ()=>{
         })
     }
 
+    React.useEffect(()=>{
+        if(vendor){
+            const temp = JSON.parse(JSON.stringify(vendor))
+            setValues(temp)
+        }
+    },[])
+
     const submit = ()=>{
         setProgress(1)
+        if(vendor){
+            VendorService.updateVendor(values).then(res=>{
+                if(res.data.success){
+                    setProgress(2)
+                }
+                else{
+                    setProgress(0)
+                }
+                setVendor(null)
+                setPopup(false)
+            })
+            return
+        }
         VendorService.addVendor(values)
         .then(res=>{
             if(res.data.success){
@@ -81,7 +101,7 @@ const VendorEntry = ()=>{
                 <Alert onClose={()=>setProgress(0)} severity="success">Vendor entry taked!</Alert>
         </Snackbar>
         <Container>
-            <h1>Vendor Entry</h1>
+            <h1>{vendor ? "Vendor Update":"Vendor Entry"}</h1>
             <FormControl fullWidth sx={{ m: 2 }}>
                 <InputLabel htmlFor="outlined-adornment-amount">Name</InputLabel>
                 <OutlinedInput

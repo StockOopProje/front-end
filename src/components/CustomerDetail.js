@@ -4,7 +4,6 @@ import {Add,ArrowBackIos} from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import {makeStyles} from "@mui/styles"
 import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 // services
 import CustomerService from "../services/customer"
@@ -25,6 +24,7 @@ const CustomerDetail = ()=>{
     const classes = useStyles()
 
     const [popup,setPopup] = React.useState(false)
+    const [customer,setCustomer] = React.useState(null)
     const [customers,setCustomers] = React.useState([])
 
     React.useEffect(()=>{
@@ -33,6 +33,11 @@ const CustomerDetail = ()=>{
         })
     },[popup])
 
+    const update = (cus)=>{
+        setCustomer(cus)
+        setPopup(true)
+    }
+
 
     return(
         <>
@@ -40,8 +45,8 @@ const CustomerDetail = ()=>{
                 <ArrowBackIos/>
                 Back
             </Button>
-            <Popup open={popup} setOpen={setPopup} title="Customer Entry">
-                <CustomerEntry/>
+            <Popup open={popup} setOpen={setPopup} setClose={()=>setCustomer(null)} title={customer ? "Customer Update":"Customer Entry"}>
+                <CustomerEntry setPopup={setPopup} customer={customer} setCustomer={setCustomer}/>
             </Popup>
             <SpeedDial
                 ariaLabel="SpeedDial basic example"
@@ -91,8 +96,7 @@ const CustomerDetail = ()=>{
                                 {item.email}
                             </Grid>
                             <Grid item xs={2}>
-                                <Button><EditIcon/></Button>
-                                <Button color="error"><DeleteIcon/></Button>
+                                <Button onClick={()=>update(item)}><EditIcon/></Button>
                             </Grid>
                         </Grid>
                     </Card>

@@ -13,7 +13,11 @@ const purchaseProduct = async (purchase)=>{
       return axios.post(url+"purchaseProduct",purchase)
 }
 
+const deletePurchase = async (purchase)=>{
+      return axios.post(url+"deletePurchase",purchase)
+}
 
-const service = {getAll,purchaseProduct}
+
+const service = {getAll,purchaseProduct,deletePurchase}
 
 export default service

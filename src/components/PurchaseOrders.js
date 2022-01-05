@@ -3,7 +3,6 @@ import {SpeedDial,Button, Container,Card,Grid} from '@mui/material';
 import {Add,ArrowBackIos} from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import {makeStyles} from "@mui/styles"
-import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 // services
@@ -42,6 +41,13 @@ const PurchaseOrders = ()=>{
             setPurhcases(res.data)
         })
     },[popup])
+
+    const deletePurchase =(purchase)=>{
+        PurchaseService.deletePurchase(purchase).then(res=>{
+            setPopup(true)
+            setPopup(false)
+        })
+    }
 
 
     return(
@@ -101,8 +107,7 @@ const PurchaseOrders = ()=>{
                                 {item.price}
                             </Grid>
                             <Grid item xs={2}>
-                                <Button><EditIcon/></Button>
-                                <Button color="error"><DeleteIcon/></Button>
+                                <Button color="error" onClick={()=>deletePurchase(item)}><DeleteIcon/></Button>
                             </Grid>
                         </Grid>
                     </Card>
